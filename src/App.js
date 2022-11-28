@@ -17,7 +17,7 @@ import {useForm} from "react-hook-form";
 
 import {PieChart, Pie} from 'recharts';
 
-import {button, card, form } from 'react-bootstrap';
+import {button, card, form} from 'react-bootstrap';
 
 function usePrevious(value) {
     const ref = useRef();
@@ -136,7 +136,7 @@ function App(props) {
     }, [tasks.length, prevTaskLength]);
 
     // setting variables for pie chart
-    const doneTasks = task => task.completed.length;
+    const doneTasks = 4;
     const numOfTasks = taskList.length;
 
     const data = [
@@ -148,7 +148,7 @@ function App(props) {
     return (
         <div className="todoapp">
             <h1>Hello Yolanda</h1>
-            <PieChart width={200} height={200}>
+            <PieChart width={350} height={250}>
                 {/* creating pie chart of tasks */}
                 <Pie data={data} dataKey="count" fill="green" label/>
             </PieChart>
@@ -171,15 +171,18 @@ function App(props) {
                 {taskList}
             </ul>
             <card>
-            <Form addTask={addTask}/>
+                <Form addTask={addTask}/>
             </card>
-            <card>hi</card>
-            <Router>
-                <Navbar/>
-                <Routes>
-                    <Route path='/home' component={Home}/>
-                </Routes>
-            </Router>
+            <card>
+                <Router>
+                    <Navbar/>
+                    <Routes>
+                        <Route path='/pages/home' component={Home}/>
+                        <Route path='/pages/home' component={Home}/>
+                        <Route path='/pages/home' component={Home}/>
+                    </Routes>
+                </Router>
+            </card>
         </div>
     );
 }

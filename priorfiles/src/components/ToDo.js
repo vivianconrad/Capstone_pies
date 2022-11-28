@@ -67,7 +67,7 @@ export default function ToDo(props) {
 
     const viewTemplate = (
         <div className="stack-small">
-            <div className="c-cb">
+            <div className="c-checkbox">
                 <input
                     id={props.id}
                     type="checkbox"

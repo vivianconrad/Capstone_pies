@@ -1,6 +1,7 @@
 // https://www.geeksforgeeks.org/create-a-responsive-navbar-using-reactjs/
 
 import React from 'react';
+import "../../index.css";
 import {Link} from 'react-router-dom';
 import {
     Nav,
@@ -12,33 +13,40 @@ import {
 } from './NavbarElements';
 import {
     Box,
-    Card,
     Image,
-    Heading,
     Flex,
     Text
 } from 'rebass';
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {icons} from "react-icons";
+import {ReactComponent as HouseSolid} from '../../icons/house-solid.svg';
+import {ReactComponent as UserSolid} from '../../icons/user-solid.svg';
+import {ReactComponent as BasketSolid} from '../../icons/basket-shopping-solid.svg';
+
 
 const Navbar = () => {
     return (
-        <Flex flexwrap={'wrap'} color='white' bg='black' alignItems='center'>
+        <Flex flexwrap={'wrap'} color='white' bg='orange' alignItems='center'>
             <Box px={2} py={2} width={1 / 3}>
-                <NavLink to='/home' activeStyle>Home</NavLink>
-            </Box>
-            <Box px={2} py={2} width={1 / 3}>
-                <NavLink to='/home' activeStyle>
-                    <Image
-                        src="https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.vulture.com%2F2020%2F08%2Favatar-creators-leave-netflix-remake.html&psig=AOvVaw1zYIeDWDfLDc9HU87OFU79&ust=1669592686914000&source=images&cd=vfe&ved=0CA8QjRxqFwoTCJimqcqDzfsCFQAAAAAdAAAAABAE"
-                        sx={{
-                            width: 48,
-                            height: 48,
-                            borderRadius: 9999,
-                        }}
-                    />
+                <NavLink to='../../pages/home.js' activeStyle>
+                    <div className={'main_icons'}>
+                        <HouseSolid/>
+                    </div>
                 </NavLink>
             </Box>
-            <Box px={2} py={2} width={1/3}>
-                <NavLink to='/signin'>Sign In</NavLink>
+            <Box px={2} py={2} width={1 / 3}>
+                <NavLink to='../../pages/store.js' activeStyle>
+                    <div className={'main_icons'}>
+                        <BasketSolid/>
+                    </div>
+                </NavLink>
+            </Box>
+            <Box content-align={'center'} px={2} py={2} width={1 / 3}>
+                <NavLink to='../../pages/profile.js'>
+                    <div className={'main_icons'}>
+                        <UserSolid/>
+                    </div>
+                </NavLink>
             </Box>
         </Flex>
     );
