@@ -1,6 +1,6 @@
 import React, {useState, useRef, useEffect} from "react";
 import {nanoid} from "nanoid";
-import "./index.css";
+import "./css/index.css";
 
 //form imports
 import Form from "./components/Form"

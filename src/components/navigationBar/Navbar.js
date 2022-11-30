@@ -1,7 +1,7 @@
 // https://www.geeksforgeeks.org/create-a-responsive-navbar-using-reactjs/
 
 import React from 'react';
-import "../../index.css";
+import "../../css/index.css";
 import {Link} from 'react-router-dom';
 import {
     Nav,
