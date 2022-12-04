@@ -29,7 +29,7 @@ function usePrevious(value) {
 
 // createStore({
 //     data: {
-//         taskName: '',
+//         tazskName: '',
 //         taskCategory: '',
 //     }
 // });
@@ -37,7 +37,10 @@ function usePrevious(value) {
 const FILTER_MAP = {
     All: () => true,
     Active: task => !task.completed,
-    Completed: task => task.completed
+    Completed: task => task.completed,
+    // Learning: task => task.category === "Learning",
+    // Work: task => task.category === "Work",
+    // Personal: task => task.category === "Personal",
 };
 
 const FILTER_MAP2 = {
@@ -106,6 +109,19 @@ function App(props) {
             name={name}
             isPressed={name === filter}
             setFilter={setFilter}
+        />
+    ));
+
+    const categoryTaskList = tasks.filter(FILTER_MAP[filter]).map(task => (
+        <Todo
+            id={task.id}
+            name={task.name}
+            completed={task.completed}
+            category={task.category}
+            key={task.id}
+            toggleTaskCompleted={toggleTaskCompleted}
+            deleteTask={deleteTask}
+            editTask={editTask}
         />
     ));
 

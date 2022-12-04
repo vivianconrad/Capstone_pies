@@ -22,6 +22,7 @@ import {icons} from "react-icons";
 import {ReactComponent as HouseSolid} from '../../icons/house-solid.svg';
 import {ReactComponent as UserSolid} from '../../icons/user-solid.svg';
 import {ReactComponent as BasketSolid} from '../../icons/basket-shopping-solid.svg';
+import {ReactComponent as CubesStackedSolid} from '../../icons/cubes-stacked-solid.svg';
 
 
 const Navbar = () => {
@@ -31,6 +32,15 @@ const Navbar = () => {
                 <NavLink to='../../pages/home.js' activeStyle>
                     <div className={'main_icons'}>
                         <HouseSolid/>
+                        <div className={'navbar_page_label'}>home</div>
+                    </div>
+                </NavLink>
+            </Box>
+            <Box content-align={'center'} px={2} py={2} width={1 / 3}>
+                <NavLink to='../../pages/stack.js'>
+                    <div className={'main_icons'}>
+                        <CubesStackedSolid/>
+                        <div className={'navbar_page_label'}>stack</div>
                     </div>
                 </NavLink>
             </Box>
@@ -38,6 +48,7 @@ const Navbar = () => {
                 <NavLink to='../../pages/store.js' activeStyle>
                     <div className={'main_icons'}>
                         <BasketSolid/>
+                        <div className={'navbar_page_label'}>shop</div>
                     </div>
                 </NavLink>
             </Box>
@@ -45,6 +56,7 @@ const Navbar = () => {
                 <NavLink to='../../pages/profile.js'>
                     <div className={'main_icons'}>
                         <UserSolid/>
+                        <div className={'navbar_page_label'}>profile</div>
                     </div>
                 </NavLink>
             </Box>
