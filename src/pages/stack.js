@@ -1,11 +1,11 @@
 import React from 'react';
 
-const Home = () => {
+const Stack = () => {
     return (
         <div
             style={{
                 display: 'flex',
-                justifyContent: 'Right',
+                justifyContent: 'center',
                 alignItems: 'Right',
                 height: '100vh'
             }}
@@ -15,4 +15,4 @@ const Home = () => {
     );
 };
 
-export default Home;
+export default Stack;

@@ -86,11 +86,23 @@ body {
 
 /* GLOBAL STYLES */
 
+#appLayout {
+    background-color: white;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
 body {
     padding: 0;
     /* margin: 0; */
     margin-block: 0;
     height: 100vh;
+}
+
+#root {
+    height: 100%;
 }
 
 .form-group>input[type="text"] {
@@ -190,7 +202,8 @@ body {
 
 .todoapp {
     background: #fff;
-    margin: 2rem 0 4rem 0;
+    /* margin: 2rem 0 4rem 0; */
+    height: 100%;
     padding: 1rem;
     position: relative;
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 2.5rem 5rem 0 rgba(0, 0, 0, 0.1);
@@ -367,6 +380,63 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+
+/* NAVBAR */
+
+#appNavBar {
+    background-color: orange;
+}
+
+#appNavBar>ul {
+    display: flex;
+    justify-content: space-around;
+    align-items: stretch;
+    margin: 0;
+}
+
+.navbar_button {
+    flex-grow: 1;
+    flex-basis: 0;
+}
+
+.navbar_button>a:hover {
+    background-color: rgba(255, 255, 255, .25);
+    font-size: 1.5vh;
+}
+
+.navbar_button>a {
+    margin: 1rem;
+    padding: .5rem;
+    text-align: center;
+    text-decoration: none;
+    font-size: 0;
+    height: 6vh;
+    border-radius: 3vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    transition: background-color 100ms, font-size 100ms;
+}
+
+.navbar_button>a svg {
+    fill: rgba(255, 255, 255, 0);
+    stroke: white;
+    stroke-width: 2vh;
+    flex-grow: 0;
+    height: 3vh;
+    overflow: visible;
+    transition: fill 200ms, stroke-width 50ms;
+}
+
+.navbar_button>a:hover svg {
+    fill: white;
+    stroke-width: 0vh;
+}
+
+.navbar_page_label {
+    margin-bottom: -.25vh;
 }
 
 .navbar_page_label:not(.active) {
