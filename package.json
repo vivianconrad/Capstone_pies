@@ -18,6 +18,7 @@
     "eslint": "^8.28.0",
     "eslint-plugin-react": "^7.31.11",
     "formidable": "^2.0.1",
+    "jquery": "^3.6.1",
     "little-state-machine": "^4.8.0",
     "nanoid": "^4.0.0",
     "prop-types": "^15.8.1",

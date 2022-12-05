@@ -1,6 +1,6 @@
 // https://www.geeksforgeeks.org/create-a-responsive-navbar-using-reactjs/
 
-import React from 'react';
+import React, {Component} from 'react';
 import "../../index.css";
 import { BrowserRouter, Route, Link } from "react-router-dom";
 // import {
@@ -17,12 +17,15 @@ import {
     Flex,
     Text
 } from 'rebass';
+import $, { event } from 'jquery'
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {icons} from "react-icons";
 import {ReactComponent as HouseSolid} from '../../icons/house-solid.svg';
 import {ReactComponent as UserSolid} from '../../icons/user-solid.svg';
 import {ReactComponent as BasketSolid} from '../../icons/basket-shopping-solid.svg';
 import {ReactComponent as CubesStackedSolid} from '../../icons/cubes-stacked-solid.svg';
+
+// import { Component } from 'react';
 
 
 // const Navbar = () => {
@@ -64,37 +67,92 @@ import {ReactComponent as CubesStackedSolid} from '../../icons/cubes-stacked-sol
 //     );
 // };
 
-function Navbar(){
-    return(
-        <nav id="appNavBar">
-            <ul>
-                <li className={'navbar_button'}>
-                    <Link to='/'>
-                        <HouseSolid/>
-                        <div className={'navbar_page_label'}>home</div>
-                    </Link>
-                </li>
-                <li className={'navbar_button'}>
-                    <Link to="/stack">
-                        <CubesStackedSolid/>
-                        <div className={'navbar_page_label'}>stack</div>
-                    </Link>
-                </li>
-                <li className={'navbar_button'}>
-                    <Link to="/store">
-                        <BasketSolid/>
-                        <div className={'navbar_page_label'}>shop</div>
-                    </Link>
-                </li>
-                <li className={'navbar_button'}>
-                    <Link to="/profile">
-                        <UserSolid/>
-                        <div className={'navbar_page_label'}>profile</div>
-                    </Link>
-                </li>
-            </ul>
-        </nav>
-    )
-}
+// function Navbar(){
+//     jQuerycode = () =>{
+//         $(".navbar_button:not(.active)").click(function(){
+//             $(".navbar_button").removeClass("active");
+//             target.addClass("active");
+//         });
+//     }
+//     componentDidMount(){
+//         this.jQuerycode();
+//     }
+//     return(
+//         <nav id="appNavBar">
+//             <ul>
+//                 <li className={'navbar_button'}>
+//                     <Link to='/'>
+//                         <HouseSolid/>
+//                         <div className={'navbar_page_label'}>home</div>
+//                     </Link>
+//                 </li>
+//                 <li className={'navbar_button'}>
+//                     <Link to="/stack">
+//                         <CubesStackedSolid/>
+//                         <div className={'navbar_page_label'}>stack</div>
+//                     </Link>
+//                 </li>
+//                 <li className={'navbar_button'}>
+//                     <Link to="/store">
+//                         <BasketSolid/>
+//                         <div className={'navbar_page_label'}>shop</div>
+//                     </Link>
+//                 </li>
+//                 <li className={'navbar_button'}>
+//                     <Link to="/profile">
+//                         <UserSolid/>
+//                         <div className={'navbar_page_label'}>profile</div>
+//                     </Link>
+//                 </li>
+//             </ul>
+//         </nav>
+//     )
+// }
 
-export default Navbar;
+// export default Navbar;
+
+export default class Navbar extends Component{
+    jQuerycode = () => {
+        $(".navbar_button:not(.active)").click(function(){
+            // alert("button clicked");
+            $(".navbar_button").removeClass("active");
+            $(this).addClass("active");
+        });
+    }
+    componentDidMount(){
+        this.jQuerycode();
+    }
+    render(){
+        return(
+            <nav id="appNavBar">
+                <ul>
+                    <li className={'navbar_button'} onClick={() => this.currentTarget.classList.toggle('active')}>
+                        <Link to='/'>
+                            <HouseSolid/>
+                            <div className={'navbar_page_label'}>home</div>
+                        </Link>
+                    </li>
+                    <li className={'navbar_button'}>
+                        <Link to="/stack">
+                            <CubesStackedSolid/>
+                            <div className={'navbar_page_label'}>stack</div>
+                        </Link>
+                    </li>
+                    <li className={'navbar_button'}>
+                        <Link to="/store">
+                            <BasketSolid/>
+                            <div className={'navbar_page_label'}>shop</div>
+                        </Link>
+                    </li>
+                    <li className={'navbar_button'}>
+                        <Link to="/profile">
+                            <UserSolid/>
+                            <div className={'navbar_page_label'}>profile</div>
+                        </Link>
+                    </li>
+                </ul>
+            </nav>
+        )
+    }
+    
+}

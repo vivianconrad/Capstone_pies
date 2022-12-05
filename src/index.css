@@ -94,6 +94,11 @@ body {
     justify-content: space-between;
 }
 
+.app_page {
+    overflow-y: auto;
+    height: 100%;
+}
+
 body {
     padding: 0;
     /* margin: 0; */
@@ -231,6 +236,16 @@ body {
     text-align: center;
     /*margin: 0;*/
     margin-bottom: 1rem;
+}
+
+.top_header {
+    background-color: orange;
+    padding: 1rem;
+}
+
+.top_header h1 {
+    color: white;
+    font-weight: 900;
 }
 
 .label_large {
@@ -401,7 +416,11 @@ body {
     flex-basis: 0;
 }
 
-.navbar_button>a:hover {
+.navbar_button:hover>a {
+    background-color: rgba(255, 255, 255, .1);
+}
+
+.navbar_button.active>a {
     background-color: rgba(255, 255, 255, .25);
     font-size: 1.5vh;
 }
@@ -411,7 +430,6 @@ body {
     padding: .5rem;
     text-align: center;
     text-decoration: none;
-    font-size: 0;
     height: 6vh;
     border-radius: 3vh;
     display: flex;
@@ -422,34 +440,31 @@ body {
 
 .navbar_button>a svg {
     fill: rgba(255, 255, 255, 0);
-    stroke: white;
+    stroke: rgba(255, 255, 255, .8);
     stroke-width: 2vh;
     flex-grow: 0;
     height: 3vh;
     overflow: visible;
-    transition: fill 200ms, stroke-width 50ms;
+    transition: fill 100ms, stroke-width 100ms;
 }
 
-.navbar_button>a:hover svg {
+.navbar_button.active>a svg {
     fill: white;
     stroke-width: 0vh;
 }
 
-.navbar_page_label {
+.navbar_button .navbar_page_label {
     margin-bottom: -.25vh;
-}
-
-.navbar_page_label:not(.active) {
     color: white;
-    transition: height 5000ms, scale 500ms;
+    transition: height 5000ms, scale 500ms, font-size 50ms;
 }
 
-.navbar_page_label:not(.active) {
-    /* scale: 0%; */
-    /* height: 0px; */
+.navbar_button:not(.active):not(:hover) .navbar_page_label {
+    font-size: 0;
 }
 
-.active .navbar_page_label {
+.navbar_button.active .navbar_page_label,
+.navbar_button:hover .navbar_page_label {
     scale: 100%;
     height: fit-content;
 }
