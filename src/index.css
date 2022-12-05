@@ -404,6 +404,10 @@ body {
     background-color: orange;
 }
 
+#appNavBar * {
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
 #appNavBar>ul {
     display: flex;
     justify-content: space-around;
@@ -441,7 +445,7 @@ body {
 .navbar_button>a svg {
     fill: rgba(255, 255, 255, 0);
     stroke: rgba(255, 255, 255, .8);
-    stroke-width: 2vh;
+    stroke-width: 2em;
     flex-grow: 0;
     height: 3vh;
     overflow: visible;
