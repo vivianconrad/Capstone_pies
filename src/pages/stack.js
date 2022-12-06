@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import './stack.css';
 import $, { event } from 'jquery'
+import { func } from 'prop-types';
 
 const possibleCat = ["cat1", "cat2", "cat3"];
 const possiblePriorities = ["priority0", "priority1", "priority2", "priority3"];
@@ -45,7 +46,7 @@ export default class Stack extends Component{
             
         
             clearTimeout(weightDeleteTimeout);
-            weightDeleteTimeout = setTimeout(respaceWeightsPartTwo, 1250);
+            weightDeleteTimeout = setTimeout(respaceWeightsPartTwo, 1500);
 
             updateBar();
         };
@@ -133,13 +134,15 @@ export default class Stack extends Component{
             // const targetParams = category+priority;
             const targetWeight = $(targetParams + ":not(.removed-weight)");
             targetWeight[0].scrollIntoView({behavior: "smooth", block: "center", inline: "nearest"});
-            targetWeight.removeClass("new-weight");
+            // targetWeight.last().removeClass("moved-weight");
+            // targetWeight.last().removeClass("completed-weight");
             //end and print error if no matching weight is found
             if (targetWeight.length == 0) {
                 console.warn("Tried to remove a weight that doesn't exist: " + targetParams);
                 return;
             }
             targetWeight.last().addClass("removed-weight");
+            // targetWeight.last().fadeOut();
             respaceWeights();
         };
         
@@ -149,13 +152,31 @@ export default class Stack extends Component{
         };
         //removes every completed weight
         function removeCompletedWeights() {
-            repeatWithDelay(removeLastWeightOfClass, $(".completed-weight").length, [".completed-weight"], 100, 3000);
+            $(".weight").removeClass("moved-weight");
+            $(".weight").removeClass("new-weight");
 
+            repeatWithDelay(removeLastWeightOfClass, $(".completed-weight").length, [".completed-weight"], 500, 3000);
+
+            let tasks = JSON.parse(localStorage.getItem("tasks"));
+            tasks.forEach((task, index, arr) => {
+                if(task.completed){
+                    arr.splice(index, 1);
+                }
+            });
+            localStorage.setItem("tasks", JSON.stringify(tasks));
         };
         
         //creates a new weight and places it at the end of the weights
         //if "animate" is true, the weight will be added at the top before moving to its new spot
-        function createWeightOfClass(category, priority, animate = false) {
+        function createWeightOfClass(category, priority, completed = false, animate = true) {
+
+            //prevent too many weights
+            if($("#weights *").length>500){
+                console.log("TOO MANY TASKS TO DISPLAY");
+                return;
+            }
+
+
             //removes . from class names
             //TODO: more robust filtering
             const filteredCategory = category.replace(".", "");
@@ -166,6 +187,9 @@ export default class Stack extends Component{
             newWeight.addClass("weight");
             newWeight.addClass(filteredCategory);
             newWeight.addClass(filteredPriority);
+            if(completed){
+                newWeight.addClass("completed-weight");
+            }
             if (animate) {
                 newWeight.addClass("new-weight");
             }
@@ -183,10 +207,10 @@ export default class Stack extends Component{
             }
         
             // debug, remove this
-            newWeight.on("click", function() {
-                $(this).toggleClass("completed-weight");
-                updateBar();
-            });
+            // newWeight.on("click", function() {
+            //     $(this).toggleClass("completed-weight");
+            //     updateBar();
+            // });
         
         };
         
@@ -273,6 +297,20 @@ export default class Stack extends Component{
         
         function DEBUGaddRandomWeights() {
             let randomWeights = [];
+
+            let animate = sessionStorage.getItem("taskStackAlreadyAnimated");
+            animate = (animate != "true");
+            sessionStorage.setItem("taskStackAlreadyAnimated", true);
+            let delay = 0;
+
+            // animate = true;
+
+            if(animate){
+                delay = 100;
+            }
+
+            console.log("delay:"+delay);
+            
             for (let index = 0; index < 100; index++) {
         
                 //pick a random categorys
@@ -296,23 +334,70 @@ export default class Stack extends Component{
                         priority = possiblePriorities[0];
                         break;
                 }
+
+                random = Math.random();
+                const completed = random > .1;
         
-                randomWeights.push([category, priority, true]);
+                randomWeights.push([category, priority, completed, animate]);
             }
-        
+
             console.log(randomWeights);
             repeatForEachWithDelay(createWeightOfClass,
                 randomWeights,
-                500, 3000);
+                delay, 3000);
         
         
         };
 
+        function addWeightsFromLocalStorage(){
+            const tasks = JSON.parse(localStorage.getItem("tasks"));
+            let weightsToAdd = [];
+
+            let animate = sessionStorage.getItem("taskStackAlreadyAnimated");
+            animate = (animate != "true");
+            sessionStorage.setItem("taskStackAlreadyAnimated", true);
+            let delay = 0;
+
+            // animate = true;
+
+            if(animate){
+                delay = 100;
+            }
+
+            tasks.forEach(task => {
+                let category = task.category;
+                if (category==="Personal"){
+                    category = ".cat1"
+                }
+                else if (category==="Learning"){
+                    category = ".cat2"
+                }
+                else if (category==="Work"){
+                    category = ".cat3"
+                }
+
+                const priority = task.priority;
+
+                const completed = task.completed;
+
+                weightsToAdd.push([category, priority, completed, animate]);
+            });
+
+            console.log("weightsToAdd: "+ weightsToAdd);
+            repeatForEachWithDelay(createWeightOfClass,
+                weightsToAdd,
+                delay, 3000);
+        }
+
         // this.addOneCoin();
-        DEBUGaddRandomWeights();
+        // DEBUGaddRandomWeights();
+        // alert(localStorage.getItem("tasks"));
+        addWeightsFromLocalStorage();
+
         // createWeightOfClass(".cat1", ".priority3", false);
         // alert(test);
 
+        $('#addRandomWeightsButton').on("click", function() {DEBUGaddRandomWeights()});
         $('#clearCompletedTasksButton').on("click", function() {removeCompletedWeights()});
     };
 
@@ -334,19 +419,20 @@ export default class Stack extends Component{
                         </div>
                         <div id="weight_tray">
                             
-                            {/* <div id="cat1BarComplete" class="completed-weight"></div> */}
+                            <div id="cat1BarComplete" class="completed-tray-section"></div>
                             <div id="cat1Bar"></div>
                             
-                            {/* <div id="cat2BarComplete" class="completed-weight"></div> */}
+                            <div id="cat2BarComplete" class="completed-tray-section"></div>
                             <div id="cat2Bar"></div>
                             
-                            {/* <div id="cat3BarComplete" class="completed-weight"></div> */}
+                            <div id="cat3BarComplete" class="completed-tray-section"></div>
                             <div id="cat3Bar"></div>
                         </div>
                         <div id="weights"></div>
                         {/* <div id="weightCoinCounter">You have {localStorage.getItem('coins')} coins</div> */}
                     </div>
                 </div>
+                <button id='addRandomWeightsButton'>DEBUG add randoms</button>
                 <button id='clearCompletedTasksButton'>clear complete tasks</button>
             </div>
         );
