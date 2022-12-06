@@ -1,0 +1,316 @@
+:root {
+    --data_viz_width: min(68rem, 100vw);
+    --faceHeightPercent: 1;
+    --faceWidth: calc(var(--data_viz_width)*.75);
+}
+
+
+/* body {
+    padding: 0;
+    margin: 0;
+    background: #e2e1e0;
+    overflow: hidden;
+} */
+
+.FORLATER {
+    margin-top: 3rem;
+    margin-inline: auto;
+    width: 35rem;
+    height: 35rem;
+    /* width: 100%; */
+    /* display: flex; */
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    /* gap: 0; */
+    /* overflow: hidden; */
+    overflow-y: scroll;
+    padding: 3rem;
+    /* padding: 1rem; */
+    background: white;
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+    border-radius: 1rem;
+}
+
+#flex_weights_container {
+    /* max-width: 40rem;
+    width: 100vw; */
+    width: var(--data_viz_width);
+    height: 100%;
+    margin: auto;
+    background: white;
+    /* padding: 1rem 3rem; */
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column-reverse;
+}
+
+#flex_weights_subcontainer * {
+    will-change: all;
+}
+
+#flex_weights_subcontainer {
+    min-height: 100%;
+    display: inline-flex;
+    flex-direction: column-reverse;
+    justify-content: flex-s;
+    align-content: center;
+    align-items: center;
+}
+
+#flex_weights_subcontainer #weights {
+    /* max-height: 90%; */
+    /* overflow-y: auto; */
+    gap: .25rem .25rem;
+    display: flex;
+    flex-wrap: wrap-reverse;
+    justify-content: center;
+    align-content: flex-start;
+    align-items: center;
+    /* flex-basis: 1000rem; */
+    flex-shrink: 1;
+}
+
+
+/* #flex_weights_subcontainer .weight_div{
+    margin-inline: .25rem;
+    background-color: lightgray;
+    width: .3rem;
+    height: 2.5rem;
+    border-radius: .25rem;
+    align-self: center;
+} */
+
+.removed-weight,
+.removed-tray,
+.removed-weight.new-weight {
+    animation: weight-remove 2s forwards ease-out;
+    pointer-events: none;
+}
+
+.new-weight {
+    animation: weight-remove .2s forwards ease-in reverse;
+    /* pointer-events: none; */
+}
+
+.moved-weight:not(.new-weight) {
+    animation: weight-moved .2s forwards ease-in-out;
+}
+
+.new-weight.moved-weight {
+    /* newly added weights animate a bit slower on first move to add emphasis */
+    animation: weight-moved .3s forwards ease-out;
+}
+
+.completed-weight:not(.removed-weight) {
+    /* scale: 90%; */
+    filter: grayscale(70%);
+}
+
+#flex_weights_subcontainer .weight {
+    /* height: 3rem; */
+    height: calc(calc(var(--data_viz_width)/10)*.75);
+    /* padding-bottom: 7.5%; */
+    /* width: 4rem; */
+    /* margin-block: .5%;
+    margin-inline: .1rem; */
+    /* border-radius: 1rem 1rem .5rem .5rem; */
+    border-radius: calc(var(--data_viz_width)/10*.35) calc(var(--data_viz_width)/10*.35) calc(var(--data_viz_width)/10*.2) calc(var(--data_viz_width)/10*.2);
+    outline: .3rem solid rgba(255, 255, 255, 0.7);
+    outline-offset: -.3rem;
+    line-height: 100%;
+    text-align: center;
+    font-family: sans-serif;
+    font-size: calc(var(--data_viz_width)/14);
+    font-weight: 800;
+    color: rgba(255, 255, 255, 0.893);
+    /* overflow: hidden; */
+    -webkit-tap-highlight-color: transparent;
+}
+
+#flex_weights_subcontainer .priority0 {
+    /* width: 4rem; */
+    width: calc(var(--data_viz_width)/10);
+    /* width: 10%; */
+}
+
+#flex_weights_subcontainer .priority1 {
+    /* width: 6rem; */
+    width: calc(var(--data_viz_width)/7);
+    /* width: 16%; */
+}
+
+#flex_weights_subcontainer .priority1::after {
+    content: "!";
+}
+
+#flex_weights_subcontainer .priority2 {
+    /* width: 14rem; */
+    width: calc(var(--data_viz_width)/4);
+}
+
+#flex_weights_subcontainer .priority2::after {
+    content: "!!";
+}
+
+#flex_weights_subcontainer .priority3 {
+    width: 32rem;
+    width: calc(var(--data_viz_width)/1.2);
+}
+
+#flex_weights_subcontainer .priority3::after {
+    content: "!!!";
+}
+
+#flex_weights_subcontainer .weight.cat1 {
+    /* background-color: lime; */
+    /* background: rgb(184,184,184); */
+    background: lime;
+}
+
+#flex_weights_subcontainer .weight.cat2 {
+    background: coral;
+}
+
+#flex_weights_subcontainer .weight.cat3 {
+    background: aqua;
+}
+
+#flex_weights_subcontainer #weight_tray {
+    background-color: gray;
+    height: 1rem;
+    width: 90%;
+    border-radius: 1rem 1rem 3rem 3rem;
+    margin-block: .3rem;
+    margin-top: .25rem;
+    /* scale: 110%; */
+    flex-shrink: 0;
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    overflow: hidden;
+    /* outline: .2rem solid rgba(255, 255, 255, 0.75); */
+    outline-offset: -.2rem;
+    transition: height margin-top scale .5s;
+    /* box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23); */
+}
+
+#flex_weights_subcontainer #weight_tray * {
+    transition: flex-grow 1s;
+}
+
+#flex_weights_subcontainer #weight_tray #cat1Bar,
+#flex_weights_subcontainer #weight_tray #cat1BarComplete {
+    background-color: lime;
+}
+
+#flex_weights_subcontainer #weight_tray #cat2Bar,
+#flex_weights_subcontainer #weight_tray #cat2BarComplete {
+    background-color: coral;
+}
+
+#flex_weights_subcontainer #weight_tray #cat3Bar,
+#flex_weights_subcontainer #weight_tray #cat3BarComplete {
+    background-color: aqua;
+}
+
+
+/* #flex_weights_subcontainer #face{
+    max-height: 100%;
+    min-height: 10%;
+    width: 100%;
+    height: 100%;
+    flex-shrink: 0;
+    flex-shrink: 100;
+    background-color: lightsteelblue;
+    flex-basis: 100%;
+    border-radius: 100%;
+    outline: .3rem solid rgba(255, 255, 255, 0.75);
+    outline-offset: -.3rem;
+    background-image: url("Rusch_Thomastmr80977-1[3431].jpg");
+    background-size: 100% 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    animation: 2000ms ease-in-out faceIntro forwards;
+    transition: flex-basis 100ms;
+    height: 1;
+} */
+
+#user_hat {
+    /* display: none; */
+    min-height: 1rem;
+    height: calc(var(--data_viz_width)*.75*(var(--faceHeightPercent))*.5);
+    width: calc(var(--data_viz_width)*.75);
+    /* flex-basis: calc(var(--data_viz_width)*.75*(var(--faceHeightPercent)*var(--faceHeightPercent))*.5); */
+    flex-grow: 0;
+    z-index: 1;
+    background-image: url(./cap-g7b1ecccbd_640.png);
+    background-size: 100% 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+    bottom: calc(var(--data_viz_width)*.75*(var(--faceHeightPercent)*var(--faceHeightPercent))*.1);
+}
+
+#face {
+    background-image: url("Rusch_Thomastmr80977-1[3431].jpg");
+    background-size: 100% 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    border-radius: 100%;
+    outline: .3rem solid rgba(255, 255, 255, 0.75);
+    outline-offset: -.3rem;
+    min-height: 5rem;
+    height: calc(var(--faceWidth)*var(--faceHeightPercent));
+    width: var(--faceWidth);
+    will-change: height;
+    transition: height 1000ms;
+}
+
+@keyframes weight-remove {
+    0% {
+        cursor: default;
+        opacity: 100%;
+        margin-bottom: 0;
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-10rem);
+        /* scale: 0%; */
+    }
+    /* 100%{
+        opacity: 0;
+        margin-bottom: -3rem;
+    } */
+}
+
+@keyframes weight-moved {
+    from {
+        scale: 1 1;
+    }
+    40% {
+        scale: 0 1;
+    }
+    50% {
+        scale: 0 1;
+    }
+    to {
+        scale: 1 1;
+    }
+}
+
+#clearCompletedTasksButton {
+    padding: 1rem;
+    border-radius: 2rem;
+    color: white;
+    background-color: orange;
+    position: absolute;
+    bottom: 1rem;
+    right: 1rem;
+    opacity: 70%;
+    transition: opacity 100ms;
+}
+
+#clearCompletedTasksButton:hover {
+    opacity: 100%;
+}

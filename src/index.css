@@ -97,6 +97,7 @@ body {
 .app_page {
     overflow-y: auto;
     height: 100%;
+    position: relative;
 }
 
 body {

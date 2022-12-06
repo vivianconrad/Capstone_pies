@@ -1,5 +1,5 @@
-import React, {useState, useRef, useEffect} from "react";
-import {nanoid} from "nanoid";
+import React, { useState, useRef, useEffect } from "react";
+import { nanoid } from "nanoid";
 import "./index.css";
 
 //form imports
@@ -7,17 +7,17 @@ import Form from "./components/Form"
 import FilterCompleteButton from "./components/buttons/FilterCompleteButton";
 import FilterCategoryButton from "./components/buttons/FilterCategoryButton";
 import Todo from "./components/Todo";
-import {StateMachineProvider, createStore} from "little-state-machine";
+import { StateMachineProvider, createStore } from "little-state-machine";
 
 //navigation imports
 import Navbar from "./components/navigationBar/Navbar";
-import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from "./pages/home";
-import {useForm} from "react-hook-form";
+import { useForm } from "react-hook-form";
 
-import {PieChart, Pie} from 'recharts';
+import { PieChart, Pie } from 'recharts';
 
-import {button, card, form} from 'react-bootstrap';
+import { button, card, form } from 'react-bootstrap';
 
 function usePrevious(value) {
     const ref = useRef();
@@ -52,6 +52,8 @@ const FILTER_MAP2 = {
 
 const FILTER_NAMES = Object.keys(FILTER_MAP);
 const FILTER_CATEGORY = Object.keys(FILTER_MAP2);
+
+localStorage.setItem('coins', 0);
 
 
 // function App(props) {
@@ -163,7 +165,7 @@ const FILTER_CATEGORY = Object.keys(FILTER_MAP2);
 
 //     return (
 //         <div className="todoapp">
-        
+
 //             <card>
 //                 <Router>
 //                     <Navbar/>
