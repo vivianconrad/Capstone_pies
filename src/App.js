@@ -75,11 +75,6 @@ localStorage.setItem('coins', 0);
 //         setTasks(updatedTasks);
 //     }
 
-//     function deleteTask(id) {
-//         const remainingTasks = tasks.filter(task => id !== task.id);
-//         setTasks(remainingTasks);
-//     }
-
 //     function editTask(id, newName, newCategory) {
 //         const editedTaskList = tasks.map(task => {
 //             // if this task has the same ID as the edited task
