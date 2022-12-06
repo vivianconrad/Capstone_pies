@@ -383,6 +383,8 @@ export default class Stack extends Component{
                 weightsToAdd.push([category, priority, completed, animate]);
             });
 
+            weightsToAdd = weightsToAdd.sort((a, b) => 0.5 - Math.random());
+
             console.log("weightsToAdd: "+ weightsToAdd);
             repeatForEachWithDelay(createWeightOfClass,
                 weightsToAdd,
