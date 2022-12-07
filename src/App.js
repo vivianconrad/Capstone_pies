@@ -169,14 +169,19 @@ function App(props) {
 	 * @param newCategory - the new category that the user has selected
 	 */
 	function editTask(id, newName, newCategory) {
-		let editedTaskList = JSON.parse(localStorage.getItem("tasks")).map((task) => {
-			// if this task has the same ID as the edited task
-			if (id === task.id) {
-				//
-				return { ...task, name: newName, category: newCategory };
-			}
-			return task;
-		});
+        console.log("WOW");
+		let editedTaskList = JSON.parse(localStorage.getItem("tasks"));
+        editedTaskList.array.forEach((element, index) => {
+            console.log("cool: " + element);
+        });
+        // .map((task) => {
+		// 	// if this task has the same ID as the edited task
+		// 	if (id === task.id) {
+		// 		//
+		// 		return { ...task, name: newName, category: newCategory };
+		// 	}
+		// 	return task;
+		// });
 		setTasks(editedTaskList);
 	}
 
@@ -223,12 +228,13 @@ function App(props) {
 	 * @param name - the name of the task
 	 * @param category - the category that the task is in
 	 */
-	function addTask(name, category) {
+	function addTask(name, category = "Learning") {
 		const newTask = {
 			id: "todo-" + nanoid(),
 			name: name,
 			completed: false,
 			category: category,
+            priority: "priority0"
 		};
 		setTasks([...JSON.parse(localStorage.getItem("tasks")), newTask]);
 	}
