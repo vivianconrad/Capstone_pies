@@ -56,7 +56,7 @@
     /* flex-basis: 1000rem; */
     flex-shrink: 1;
     position: absolute;
-    bottom: 3rem;
+    bottom: 4rem;
     width: var(--data_viz_width);
     --distanceDown: calc(var(--faceWidth)*(var(--faceHeightPercent)*-1));
     transform: translateY(calc(var(--distanceDown)));
@@ -216,7 +216,7 @@
     left: 0;
     right: 0;
     text-align: center;
-    bottom: 1rem;
+    bottom: 2rem;
 }
 
 #flex_weights_subcontainer #weight_tray * {
@@ -303,7 +303,7 @@
     will-change: transform;
     transition: transform var(--squishTime);
     position: absolute;
-    bottom: 0;
+    bottom: 1rem;
 }
 
 @keyframes weight-remove {
