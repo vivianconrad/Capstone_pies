@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "../css/store.css";
 
+/* It's a page that displays a list of hats that the user can buy */
 export default class Store extends Component {
 	render() {
 		return (

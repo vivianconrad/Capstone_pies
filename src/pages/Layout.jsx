@@ -1,3 +1,4 @@
+// Page was in an attempt to route between pages.
 import { faColumns } from "@fortawesome/free-solid-svg-icons";
 import React from "react";
 import { Outlet } from "react-router-dom";

@@ -1,5 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
 
+/**
+ * It returns the previous value of the argument passed to it.
+ * @param value - The value to be stored in the ref.
+ * @returns The previous value of the value passed in.
+ */
 function usePrevious(value) {
 	const ref = useRef();
 	useEffect(() => {
@@ -8,6 +13,12 @@ function usePrevious(value) {
 	return ref.current;
 }
 
+/**
+ * It's a function that takes in props and returns a list item with a form or a div, depending on
+ * whether the user is editing the task or not
+ * @param props - {
+ * @returns The return statement is returning the template that is being used.
+ */
 export default function Todo(props) {
 	const [isEditing, setEditing] = useState(false);
 	const [newName, setNewName] = useState("");
@@ -19,12 +30,27 @@ export default function Todo(props) {
 
 	const wasEditing = usePrevious(isEditing);
 
+	/**
+	 * The function is called when the user types in the input field. The function takes the value of the
+	 * input field and sets the state of the newName variable to the value of the input field
+	 * @param e - the event object
+	 */
 	function handleChange(e) {
 		setNewName(e.target.value);
 		setCategory(e.target.value);
 		setPriority(e.target.value);
 	}
 
+	/**
+	 * The function is called when the user clicks the submit button on the form. It prevents the default
+	 * action of the form, which is to refresh the page. It then checks to see if the user has entered a
+	 * task name. If not, it returns. If so, it calls the editTask function, which is passed down from the
+	 * parent component, and passes in the id of the task, the new name, the new category, and the new
+	 * priority. It then sets the newName, newCategory, and newPriority to empty strings, sets editing to
+	 * false, and returns.
+	 * @param e - event
+	 * @returns The return statement is returning the form.
+	 */
 	function handleSubmit(e) {
 		e.preventDefault();
 		if (!newName.trim()) {

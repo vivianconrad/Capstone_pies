@@ -244,8 +244,6 @@ function App(props) {
 		setTasks([...JSON.parse(localStorage.getItem("tasks")), newTask]);
 		window.location.reload();
 	}
-	// hu
-	// hu2
 
 	/* This is a ternary operator. It is saying if the taskList.length is not equal to 1, then the
     tasksNoun is tasks, otherwise it is task. The headingText is saying that the headingText is the
