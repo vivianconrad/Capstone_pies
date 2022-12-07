@@ -40,14 +40,14 @@ const DATA = [
 	{
 		id: "todo-2",
 		name: "Create Powerpoint",
-		completed: false,
+		completed: true,
 		category: "Work",
 		priority: "priority1",
 	},
 	{
 		id: "todo-3",
 		name: "Buy more dog food",
-		completed: false,
+		completed: true,
 		category: "Personal",
 		priority: "priority3",
 	},
