@@ -36,6 +36,19 @@ export default function Todo(props) {
         setEditing(false);
     }
 
+    function readablePriority(priority){
+        if(priority === "priority1"){
+            return "❗";
+        }
+        if(priority === "priority2"){
+            return "❗❗";
+        }
+        if(priority === "priority3"){
+            return "❗❗❗";
+        }
+        return "";
+    }
+
     const editingTemplate = (
         <form className="stack-small" onSubmit={handleSubmit}>
             <div className="form-group">
@@ -92,6 +105,9 @@ export default function Todo(props) {
                 </label>
                 <label className="todo-label">
                     {props.category}
+                </label>
+                <label className="todo-label">
+                    {readablePriority(props.priority)}
                 </label>
             </div>
             <div className="btn-group">

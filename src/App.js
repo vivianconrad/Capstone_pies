@@ -143,6 +143,7 @@ function App(props) {
 	function deleteTask(id) {
 		const remainingTasks = JSON.parse(localStorage.getItem("tasks")).filter((task) => id !== task.id);
 		setTasks(remainingTasks);
+        window.location.reload();
 	}
 
 	/**
