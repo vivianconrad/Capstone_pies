@@ -1,6 +1,6 @@
-import React from 'react';
+import React from "react";
 // import ReactDOM from 'react-dom';
-import './index.css';
+import "./css/index.css";
 // import App from './App';
 
 import ReactDOM from "react-dom";
@@ -10,7 +10,6 @@ import Home from "./pages/home";
 import Stack from "./pages/stack";
 import Store from "./pages/store";
 import Profile from "./pages/profile";
-
 
 // const DATA = [
 //     { id: "todo-0", name: "Eat", completed: true, category: "Personal"},
@@ -26,20 +25,19 @@ import Profile from "./pages/profile";
 // );
 
 export default function App() {
-    return (
-    <BrowserRouter>
-        <Routes>
-        <Route path="/" element={<Layout />}>
-            <Route index element={<Home />} />
-            <Route path="stack" element={<Stack />} />
-            <Route path="store" element={<Store />} />
-            <Route path="profile" element={<Profile />} />
-        </Route>
-        </Routes>
-    </BrowserRouter>
-    );
+	return (
+		<BrowserRouter>
+			<Routes>
+				<Route path="/" element={<Layout />}>
+					<Route index element={<Home />} />
+					<Route path="stack" element={<Stack />} />
+					<Route path="store" element={<Store />} />
+					<Route path="profile" element={<Profile />} />
+				</Route>
+			</Routes>
+		</BrowserRouter>
+	);
 }
-
 
 ReactDOM.render(<App />, document.getElementById("root"));
 // root.render(<App />);
