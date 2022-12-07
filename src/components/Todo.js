@@ -12,6 +12,7 @@ export default function Todo(props) {
 	const [isEditing, setEditing] = useState(false);
 	const [newName, setNewName] = useState("");
 	const [newCategory, setCategory] = useState();
+	const [newPriority, setPriority] = useState();
 
 	const editFieldRef = useRef(null);
 	const editButtonRef = useRef(null);
@@ -21,6 +22,7 @@ export default function Todo(props) {
 	function handleChange(e) {
 		setNewName(e.target.value);
 		setCategory(e.target.value);
+		setPriority(e.target.value);
 	}
 
 	function handleSubmit(e) {
@@ -30,9 +32,27 @@ export default function Todo(props) {
 		}
 		props.editTask(props.id, newName);
 		props.editTask(props.category, newCategory);
+		props.editTask(props.priority, newPriority);
 		setNewName("");
 		setCategory("");
+		setPriority("");
 		setEditing(false);
+	}
+
+	function readablePriority(priority) {
+		if (priority === "priority1") {
+			return "❗";
+		}
+
+		if (priority === "priority2") {
+			return "❗❗";
+		}
+
+		if (priority === "priority3") {
+			return "❗❗❗";
+		}
+
+		return "";
 	}
 
 	const editingTemplate = (
@@ -94,6 +114,7 @@ export default function Todo(props) {
 					{props.name}
 				</label>
 				<label className="todo-label">{props.category}</label>
+				<label className="todo-label">{readablePriority(props.priority)}</label>
 			</div>
 			<div className="btn-group">
 				<button

@@ -147,6 +147,7 @@ function App(props) {
 			(task) => id !== task.id
 		);
 		setTasks(remainingTasks);
+		window.location.reload();
 	}
 
 	/**
