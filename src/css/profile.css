@@ -1,0 +1,90 @@
+body {
+	background-color: #e5e5e5;
+}
+.main {
+	margin: 0;
+	padding: 0;
+	text-align: center;
+	font-family: "Raleway", "Sans-Serif";
+}
+
+h1 {
+	font-size: 30px;
+}
+
+.profile {
+	width: 15rem;
+	height: 15rem;
+	border-radius: 300px;
+	background-size: cover;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#userIMG {
+	background-image: url("../images/Thomas_User.jpg");
+}
+
+.displaySettings {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.textBox {
+	margin-top: 2rem;
+	width: 15rem;
+	height: 2rem;
+	border-radius: 15px;
+	background-color: #ffffff;
+	border: 1px solid;
+	border-color: #bababa;
+	text-align: center;
+	color: #707070;
+}
+
+.acccentColorRow {
+	display: flex;
+	flex-wrap: nowrap;
+	flex-direction: row;
+}
+
+.nochangeText {
+	width: 10rem;
+	height: 4rem;
+	border-radius: 15px;
+	background-color: #ffffff;
+	border: 1px solid;
+	border-color: #bababa;
+	text-align: center;
+	color: #707070;
+}
+
+.accentColorRow {
+	display: flex;
+	flex-direction: row;
+}
+
+.accentColor {
+	margin-left: 1rem;
+	width: 7rem;
+	height: 4rem;
+	background-color: #eba0a0;
+	border-color: #d37676;
+	border-radius: 10px;
+}
+
+.categoryColumn {
+	margin-top: 0.5rem;
+}
+.category {
+	margin-top: 1rem;
+	width: 18rem;
+	height: 4rem;
+	border-radius: 15px;
+	background-color: #ffffff;
+	border: 1px solid;
+	border-color: #bababa;
+	text-align: center;
+	font-size: 1rem;
+	color: #707070;
+}
