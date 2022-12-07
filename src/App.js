@@ -233,7 +233,7 @@ function App(props) {
 			id: "todo-" + nanoid(),
 			name: name,
 			completed: false,
-			category: category,
+			category: document.getElementById("category-input").value,
             priority: "priority0"
 		};
 		setTasks([...JSON.parse(localStorage.getItem("tasks")), newTask]);

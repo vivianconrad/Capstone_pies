@@ -37,14 +37,15 @@ function Form(props) {
                 value={taskName}
                 onChange={handleChange}
             />
-            {/*<select*/}
-            {/*    // id="new-todo-input"*/}
-            {/*    value={taskCategory}*/}
-            {/*    onChange={handleChange}>*/}
-            {/*    <option value="Learning">Learning</option>*/}
-            {/*    <option value="Personal">Personal</option>*/}
-            {/*    <option value="Work">Work</option>*/}
-            {/*</select>*/}
+            <select
+                id="category-input"
+                // value={taskCategory}
+                // onChange={handleChange}
+                >
+                <option value="Learning">Learning</option>
+                <option value="Personal">Personal</option>
+                <option value="Work">Work</option>
+            </select>
             <button type="submit" className="btn btn__primary btn__lg">
                 Add
             </button>
