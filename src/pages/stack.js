@@ -1,3 +1,4 @@
+// To do page - stacks
 import React, { Component } from "react";
 import "../css/stack.css";
 import $, { event } from "jquery";
@@ -32,6 +33,10 @@ export default class Stack extends Component {
 	componentDidMount() {
 		// updateBar();
 
+		/**
+		 * It adds coins to the local storage.
+		 * @param coinsToAdd - The amount of coins to add to the current amount of coins.
+		 */
 		function addCoins(coinsToAdd) {
 			let coins = parseInt(localStorage.getItem("coins"));
 			if (isNaN(coins)) {
@@ -45,6 +50,10 @@ export default class Stack extends Component {
 			// alert(localStorage.getItem("coins"));
 		}
 
+		/**
+		 * Remove the class 'new-weight' from all elements with the class 'weight' and the class
+		 * 'moved-weight' and then call the function 'respaceWeightsPartTwo' after 1500 milliseconds.
+		 */
 		function respaceWeights() {
 			$(".weight.new-weight.moved-weight").removeClass("new-weight");
 			// $(".weight").removeClass("new-weight");
@@ -54,6 +63,19 @@ export default class Stack extends Component {
 			weightDeleteTimeout = setTimeout(respaceWeightsPartTwo, 1500);
 		}
 
+		/**
+		 * "If the user has completed a weight, remove it and add coins to the user's coin count, then move
+		 * all weights down to fill in the empty space."
+		 *
+		 * The function is called when the user clicks on a weight.
+		 *
+		 * The function is called in the following way:
+		 *
+		 * $(".weight").click(function() {
+		 * 			$(this).addClass("removed-weight");
+		 * 			respaceWeightsPartTwo();
+		 * 		});
+		 */
 		function respaceWeightsPartTwo() {
 			let coinsEarned = $(".completed-weight.removed-weight.priority0").length;
 			coinsEarned += $(".completed-weight.removed-weight.priority1").length * 2;
@@ -80,6 +102,10 @@ export default class Stack extends Component {
 			updateBar();
 		}
 
+		/**
+		 * The function counts the number of tasks in each category and priority, and then updates the CSS
+		 * variables that control the size of the face and the bars.
+		 */
 		function updateBar() {
 			numCat1 =
 				$(".cat1.priority0:not(.completed-weight):not(.removed-weight)")
@@ -185,6 +211,11 @@ export default class Stack extends Component {
 			$(":root").css("--faceStretchPercent", faceStretchingTasks);
 		}
 
+		/**
+		 * It removes the last weight of a given class.
+		 * @param targetParams - the class of the weight to be removed
+		 * @returns the last weight of the class.
+		 */
 		function removeLastWeightOfClass(targetParams) {
 			// const targetParams = category+priority;
 			const targetWeight = $(targetParams + ":not(.removed-weight)");
@@ -204,7 +235,14 @@ export default class Stack extends Component {
 			respaceWeights();
 		}
 
-		//removes every weight
+		/**
+		 * "Remove every weight on the page, one at a time, with a delay of 100 milliseconds between each
+		 * removal, and a delay of 3000 milliseconds before the first removal."
+		 *
+		 * The function `repeatWithDelay` is a general purpose function that takes a function, a number of
+		 * times to repeat that function, an array of arguments to pass to that function, a delay between
+		 * each repetition, and a delay before the first repetition
+		 */
 		function removeEveryWeight() {
 			repeatWithDelay(
 				removeLastWeightOfClass,
@@ -215,6 +253,9 @@ export default class Stack extends Component {
 			);
 		}
 		//removes every completed weight
+		/**
+		 * It removes all the completed weights from the page and from local storage.
+		 */
 		function removeCompletedWeights() {
 			$(".weight").removeClass("moved-weight");
 			$(".weight").removeClass("new-weight");
