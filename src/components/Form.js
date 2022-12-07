@@ -46,6 +46,16 @@ function Form(props) {
                 <option value="Personal">Personal</option>
                 <option value="Work">Work</option>
             </select>
+            <select
+                id="priority-input"
+                // value={taskCategory}
+                // onChange={handleChange}
+                >
+                <option value="priority0">none</option>
+                <option value="priority1">❗</option>
+                <option value="priority2">❗❗</option>
+                <option value="priority3">❗❗❗</option>
+            </select>
             <button type="submit" className="btn btn__primary btn__lg">
                 Add
             </button>

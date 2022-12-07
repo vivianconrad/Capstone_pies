@@ -234,9 +234,10 @@ function App(props) {
 			name: name,
 			completed: false,
 			category: document.getElementById("category-input").value,
-            priority: "priority0"
+            priority: document.getElementById("priority-input").value
 		};
 		setTasks([...JSON.parse(localStorage.getItem("tasks")), newTask]);
+        window.location.reload();
 	}
 
 	/* This is a ternary operator. It is saying if the taskList.length is not equal to 1, then the
