@@ -6,7 +6,7 @@ import { func } from 'prop-types';
 const possibleCat = ["cat1", "cat2", "cat3"];
 const possiblePriorities = ["priority0", "priority1", "priority2", "priority3"];
 const minFaceSize = .15;
-const tasksAtMaxFaceSquish = 200;
+const tasksAtMaxFaceSquish = 100;
 
 let weightDeleteTimeout = Promise;
 
@@ -30,12 +30,18 @@ export default class Stack extends Component{
     // };
 
     componentDidMount() {
+
+        // updateBar();
+
         function addCoins(coinsToAdd){
             let coins = parseInt(localStorage.getItem("coins"));
-            console.log(coins);
+            if (isNaN(coins)){
+                coins = 0;
+            }
+            // console.log(coins);
             coins += coinsToAdd;
             localStorage.setItem('coins', coins);
-            console.log(coins);
+            // console.log(coins);
 
             // alert(localStorage.getItem("coins"));
         };
@@ -49,17 +55,18 @@ export default class Stack extends Component{
             clearTimeout(weightDeleteTimeout);
             weightDeleteTimeout = setTimeout(respaceWeightsPartTwo, 1500);
 
-            updateBar();
+            
         };
         
         function respaceWeightsPartTwo() {
 
-            let coinsEarned = $(".completed-weight.priority0").length;
-            coinsEarned += $(".completed-weight.priority1").length * 2;
-            coinsEarned += $(".completed-weight.priority2").length * 4;
-            coinsEarned += $(".completed-weight.priority3").length * 8;
+            let coinsEarned = $(".completed-weight.removed-weight.priority0").length;
+            coinsEarned += $(".completed-weight.removed-weight.priority1").length * 2;
+            coinsEarned += $(".completed-weight.removed-weight.priority2").length * 4;
+            coinsEarned += $(".completed-weight.removed-weight.priority3").length * 8;
         
             addCoins(coinsEarned);
+            console.log("coinsEarned: " + coinsEarned);
 
             const weightsToRemove = $(".removed-weight");
             const numOfWeightsRemoved = weightsToRemove.length;
@@ -74,6 +81,8 @@ export default class Stack extends Component{
             if (coinsEarned > 0) {
                 // alert("You earned " + coinsEarned + " coins! Great work!");
             }
+
+            updateBar();
         };
         
         function updateBar() {
@@ -109,12 +118,14 @@ export default class Stack extends Component{
         
             let totalWeight = numCat1 + numCat2 + numCat3 + numCat1Complete + numCat2Complete + numCat3Complete;
             if (totalWeight <= 0) {
-                $("#weight_tray").addClass("removed-tray");
+                $("#no_tasks_message").fadeIn();
+                // $("#weight_tray").addClass("removed-tray");
                 // $("#weight_tray").fadeOut();
             } else {
-                $("#weight_tray").removeClass("removed-tray");
+                $("#no_tasks_message").fadeOut();
+                // $("#weight_tray").removeClass("removed-tray");
         
-                $("#weight_tray").fadeIn();
+                // $("#weight_tray").fadeIn();
             }
         
             $("#cat1Bar").css('flex-grow', numCat1);
@@ -148,6 +159,8 @@ export default class Stack extends Component{
                 return;
             }
             targetWeight.last().addClass("removed-weight");
+
+            
             // targetWeight.last().fadeOut();
             respaceWeights();
         };
@@ -420,8 +433,9 @@ export default class Stack extends Component{
     
                 <div id="flex_weights_container">
                     <div id="flex_weights_subcontainer">
-                        {/* <!-- In reverse because flex:column-reverse! --> */}
                         <div id="weights"></div>
+
+                        <p id="no_tasks_message" style={{display: "none"}}>🎊 No more tasks!🎊</p>
 
                         <div id="weight_tray">
                             
