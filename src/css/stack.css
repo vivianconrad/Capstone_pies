@@ -246,6 +246,7 @@
 	transition: flex-grow 1s;
 }
 
+/* weight colors */
 #flex_weights_subcontainer #weight_tray #cat1Bar,
 #flex_weights_subcontainer #weight_tray #cat1BarComplete {
 	background-color: lime;
@@ -357,7 +358,7 @@
 	padding: 1rem;
 	border-radius: 2rem;
 	color: white;
-	background-color: orange;
+	background-color: #eba0a0;
 	position: absolute;
 	bottom: 1rem;
 	right: 1rem;
@@ -369,7 +370,7 @@
 	padding: 1rem;
 	border-radius: 2rem;
 	color: white;
-	background-color: orange;
+	background-color: #eba0a0;
 	position: absolute;
 	bottom: 6rem;
 	right: 1rem;
@@ -381,7 +382,7 @@
 	padding: 1rem;
 	border-radius: 2rem;
 	color: white;
-	background-color: orange;
+	background-color: #eba0a0;
 	position: absolute;
 	bottom: 11rem;
 	right: 1rem;

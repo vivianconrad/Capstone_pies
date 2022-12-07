@@ -103,9 +103,9 @@ function App(props) {
 	} = useForm();
 	const onSubmit = (data) => console.log(data);
 
-    function setTasks(updatedTasks){
-        localStorage.setItem("tasks", JSON.stringify(updatedTasks));
-    }
+	function setTasks(updatedTasks) {
+		localStorage.setItem("tasks", JSON.stringify(updatedTasks));
+	}
 
 	/**
 	 * "If the task has the same ID as the edited task, use object spread to make a new object whose
@@ -123,15 +123,17 @@ function App(props) {
 	 * @param id - the ID of the task to toggle
 	 */
 	function toggleTaskCompleted(id) {
-		const updatedTasks = JSON.parse(localStorage.getItem("tasks")).map((task) => {
-			// if this task has the same ID as the edited task
-			if (id === task.id) {
-				// use object spread to make a new object
-				// whose `completed` prop has been inverted
-				return { ...task, completed: !task.completed };
+		const updatedTasks = JSON.parse(localStorage.getItem("tasks")).map(
+			(task) => {
+				// if this task has the same ID as the edited task
+				if (id === task.id) {
+					// use object spread to make a new object
+					// whose `completed` prop has been inverted
+					return { ...task, completed: !task.completed };
+				}
+				return task;
 			}
-			return task;
-		});
+		);
 		setTasks(updatedTasks);
 	}
 
@@ -141,7 +143,9 @@ function App(props) {
 	 * @param id - The id of the task to be deleted
 	 */
 	function deleteTask(id) {
-		const remainingTasks = JSON.parse(localStorage.getItem("tasks")).filter((task) => id !== task.id);
+		const remainingTasks = JSON.parse(localStorage.getItem("tasks")).filter(
+			(task) => id !== task.id
+		);
 		setTasks(remainingTasks);
 	}
 
@@ -169,12 +173,12 @@ function App(props) {
 	 * @param newCategory - the new category that the user has selected
 	 */
 	function editTask(id, newName, newCategory) {
-        console.log("WOW");
+		console.log("WOW");
 		let editedTaskList = JSON.parse(localStorage.getItem("tasks"));
-        editedTaskList.array.forEach((element, index) => {
-            console.log("cool: " + element);
-        });
-        // .map((task) => {
+		editedTaskList.array.forEach((element, index) => {
+			console.log("cool: " + element);
+		});
+		// .map((task) => {
 		// 	// if this task has the same ID as the edited task
 		// 	if (id === task.id) {
 		// 		//
@@ -234,13 +238,13 @@ function App(props) {
 			name: name,
 			completed: false,
 			category: document.getElementById("category-input").value,
-            priority: document.getElementById("priority-input").value
+			priority: document.getElementById("priority-input").value,
 		};
 		setTasks([...JSON.parse(localStorage.getItem("tasks")), newTask]);
-        window.location.reload();
+		window.location.reload();
 	}
-    // hu
-    // hu2
+	// hu
+	// hu2
 
 	/* This is a ternary operator. It is saying if the taskList.length is not equal to 1, then the
     tasksNoun is tasks, otherwise it is task. The headingText is saying that the headingText is the
@@ -251,13 +255,18 @@ function App(props) {
 	const headingText = `${taskList.length} ${tasksNoun} remaining`;
 
 	const listHeadingRef = useRef(null);
-	const prevTaskLength = usePrevious(JSON.parse(localStorage.getItem("tasks")).length);
+	const prevTaskLength = usePrevious(
+		JSON.parse(localStorage.getItem("tasks")).length
+	);
 
 	/* Saying if the taskList.length is not equal to 1, then the tasksNoun is tasks, otherwise it is task.
     The headingText is saying that the headingText is the taskList.length and the tasksNoun. The
     listHeadingRef is a reference to the list heading. The prevTaskLength is the previous task length. */
 	useEffect(() => {
-		if (JSON.parse(localStorage.getItem("tasks")).length - prevTaskLength === -1) {
+		if (
+			JSON.parse(localStorage.getItem("tasks")).length - prevTaskLength ===
+			-1
+		) {
 			listHeadingRef.current.focus();
 		}
 	}, [JSON.parse(localStorage.getItem("tasks")).length, prevTaskLength]);
@@ -278,7 +287,7 @@ function App(props) {
 			<h1>Hello Yolanda</h1>
 			<PieChart width={350} height={250}>
 				{/* creating pie chart of tasks */}
-				<Pie data={data} dataKey="count" fill="green" label />
+				<Pie data={data} dataKey="count" fill="#eba0a0" label />
 			</PieChart>
 			<div className="filters btn-group stack-exception">
 				{/* adding filter of all, active, completed*/}

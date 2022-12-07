@@ -18,6 +18,7 @@ export default class Store extends Component {
 							width={"300"}
 						/>
 						<h1 class="card--title">Straw Hat</h1>
+						<h2>Price: 42 Coins</h2>
 						<button class="card--click">Equip</button>
 					</div>
 				</div>
@@ -30,6 +31,7 @@ export default class Store extends Component {
 							width={"300"}
 						/>
 						<h1 class="card--title">Top Hat</h1>
+						<h2>Price: 64 Coins</h2>
 						<button class="card--click">Equip</button>
 					</div>
 				</div>
@@ -42,6 +44,7 @@ export default class Store extends Component {
 							width={"300"}
 						/>
 						<h1 class="card--title">Bowler Hat</h1>
+						<h2>Price: 610 Coins</h2>
 						<button class="card--click">Equip</button>
 					</div>
 				</div>
