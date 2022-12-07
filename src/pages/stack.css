@@ -298,7 +298,8 @@
     height: var(--faceWidth);
     width: var(--faceWidth);
     flex-shrink: 0;
-    transform: scaleY(var(--faceHeightPercent)) scaleX(var(--faceStretchPercent));
+    /* transform: scaleY(var(--faceHeightPercent)) scaleX(var(--faceStretchPercent)); */
+    transform: scale(var(--faceStretchPercent), var(--faceHeightPercent));
     transform-origin: bottom;
     will-change: transform;
     transition: transform var(--squishTime);
