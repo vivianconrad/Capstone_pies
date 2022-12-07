@@ -60,7 +60,7 @@ const DATA = [
 	},
 ];
 
-localStorage.setItem("tasks", JSON.stringify(DATA));
+// localStorage.setItem("tasks", JSON.stringify(DATA));
 
 sessionStorage.setItem("taskStackAlreadyAnimated", false);
 
@@ -93,7 +93,8 @@ const FILTER_CATEGORY = Object.keys(FILTER_MAP2);
 function App(props) {
 	/* Using the useState hook to set the tasks and filter state. It is also using the useForm hook to
     register the form and handle the submit. */
-	const [tasks, setTasks, setCategory] = useState(props.tasks);
+	// const [tasks, setTasks, setCategory] = useState(props.tasks);
+
 	const [filter, setFilter] = useState("All");
 	const {
 		register,
@@ -101,6 +102,10 @@ function App(props) {
 		formState: { errors },
 	} = useForm();
 	const onSubmit = (data) => console.log(data);
+
+    function setTasks(updatedTasks){
+        localStorage.setItem("tasks", JSON.stringify(updatedTasks));
+    }
 
 	/**
 	 * "If the task has the same ID as the edited task, use object spread to make a new object whose
@@ -118,7 +123,7 @@ function App(props) {
 	 * @param id - the ID of the task to toggle
 	 */
 	function toggleTaskCompleted(id) {
-		const updatedTasks = tasks.map((task) => {
+		const updatedTasks = JSON.parse(localStorage.getItem("tasks")).map((task) => {
 			// if this task has the same ID as the edited task
 			if (id === task.id) {
 				// use object spread to make a new object
@@ -136,7 +141,7 @@ function App(props) {
 	 * @param id - The id of the task to be deleted
 	 */
 	function deleteTask(id) {
-		const remainingTasks = tasks.filter((task) => id !== task.id);
+		const remainingTasks = JSON.parse(localStorage.getItem("tasks")).filter((task) => id !== task.id);
 		setTasks(remainingTasks);
 	}
 
@@ -164,7 +169,7 @@ function App(props) {
 	 * @param newCategory - the new category that the user has selected
 	 */
 	function editTask(id, newName, newCategory) {
-		let editedTaskList = tasks.map((task) => {
+		let editedTaskList = JSON.parse(localStorage.getItem("tasks")).map((task) => {
 			// if this task has the same ID as the edited task
 			if (id === task.id) {
 				//
@@ -176,7 +181,7 @@ function App(props) {
 	}
 
 	/* Creating a list of tasks that are filtered by the filter map. */
-	let taskList = tasks
+	let taskList = JSON.parse(localStorage.getItem("tasks"))
 		.filter(FILTER_MAP[filter])
 		.map((task) => (
 			<Todo
@@ -225,7 +230,7 @@ function App(props) {
 			completed: false,
 			category: category,
 		};
-		setTasks([...tasks, newTask]);
+		setTasks([...JSON.parse(localStorage.getItem("tasks")), newTask]);
 	}
 
 	/* This is a ternary operator. It is saying if the taskList.length is not equal to 1, then the
@@ -237,16 +242,16 @@ function App(props) {
 	const headingText = `${taskList.length} ${tasksNoun} remaining`;
 
 	const listHeadingRef = useRef(null);
-	const prevTaskLength = usePrevious(tasks.length);
+	const prevTaskLength = usePrevious(JSON.parse(localStorage.getItem("tasks")).length);
 
 	/* Saying if the taskList.length is not equal to 1, then the tasksNoun is tasks, otherwise it is task.
     The headingText is saying that the headingText is the taskList.length and the tasksNoun. The
     listHeadingRef is a reference to the list heading. The prevTaskLength is the previous task length. */
 	useEffect(() => {
-		if (tasks.length - prevTaskLength === -1) {
+		if (JSON.parse(localStorage.getItem("tasks")).length - prevTaskLength === -1) {
 			listHeadingRef.current.focus();
 		}
-	}, [tasks.length, prevTaskLength]);
+	}, [JSON.parse(localStorage.getItem("tasks")).length, prevTaskLength]);
 
 	// setting variables for pie chart
 	const doneTasks = 4;
