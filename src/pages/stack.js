@@ -5,8 +5,8 @@ import { func } from 'prop-types';
 
 const possibleCat = ["cat1", "cat2", "cat3"];
 const possiblePriorities = ["priority0", "priority1", "priority2", "priority3"];
-const minFaceSize = .10;
-const tasksAtMaxFaceSquish = 100;
+const minFaceSize = .15;
+const tasksAtMaxFaceSquish = 200;
 
 let weightDeleteTimeout = Promise;
 
@@ -42,6 +42,7 @@ export default class Stack extends Component{
 
         function respaceWeights() {
             $(".weight.new-weight.moved-weight").removeClass("new-weight");
+            // $(".weight").removeClass("new-weight");
             $(".weight").removeClass("moved-weight");
             
         
@@ -56,7 +57,7 @@ export default class Stack extends Component{
             let coinsEarned = $(".completed-weight.priority0").length;
             coinsEarned += $(".completed-weight.priority1").length * 2;
             coinsEarned += $(".completed-weight.priority2").length * 4;
-            coinsEarned += $(".completed-weight.priority3").length * 16;
+            coinsEarned += $(".completed-weight.priority3").length * 8;
         
             addCoins(coinsEarned);
 
@@ -79,32 +80,32 @@ export default class Stack extends Component{
             numCat1 = $(".cat1.priority0:not(.completed-weight):not(.removed-weight)").length * 1;
             numCat1 += $(".cat1.priority1:not(.completed-weight):not(.removed-weight)").length * 2;
             numCat1 += $(".cat1.priority2:not(.completed-weight):not(.removed-weight)").length * 4;
-            numCat1 += $(".cat1.priority3:not(.completed-weight):not(.removed-weight)").length * 16;
+            numCat1 += $(".cat1.priority3:not(.completed-weight):not(.removed-weight)").length * 8;
         
             numCat2 = $(".cat2.priority0:not(.completed-weight):not(.removed-weight)").length * 1;
             numCat2 += $(".cat2.priority1:not(.completed-weight):not(.removed-weight)").length * 2;
             numCat2 += $(".cat2.priority2:not(.completed-weight):not(.removed-weight)").length * 4;
-            numCat2 += $(".cat2.priority3:not(.completed-weight):not(.removed-weight)").length * 16;
+            numCat2 += $(".cat2.priority3:not(.completed-weight):not(.removed-weight)").length * 8;
         
             numCat3 = $(".cat3.priority0:not(.completed-weight):not(.removed-weight)").length * 1;
             numCat3 += $(".cat3.priority1:not(.completed-weight):not(.removed-weight)").length * 2;
             numCat3 += $(".cat3.priority2:not(.completed-weight):not(.removed-weight)").length * 4;
-            numCat3 += $(".cat3.priority3:not(.completed-weight):not(.removed-weight)").length * 16;
+            numCat3 += $(".cat3.priority3:not(.completed-weight):not(.removed-weight)").length * 8;
         
             let numCat1Complete = $(".cat1.priority0.completed-weight:not(.removed-weight)").length * 1;
             numCat1Complete += $(".cat1.priority1.completed-weight:not(.removed-weight)").length * 2;
             numCat1Complete += $(".cat1.priority2.completed-weight:not(.removed-weight)").length * 4;
-            numCat1Complete += $(".cat1.priority3.completed-weight:not(.removed-weight)").length * 16;
+            numCat1Complete += $(".cat1.priority3.completed-weight:not(.removed-weight)").length * 8;
         
             let numCat2Complete = $(".cat2.priority0.completed-weight:not(.removed-weight)").length * 1;
             numCat2Complete += $(".cat2.priority1.completed-weight:not(.removed-weight)").length * 2;
             numCat2Complete += $(".cat2.priority2.completed-weight:not(.removed-weight)").length * 4;
-            numCat2Complete += $(".cat2.priority3.completed-weight:not(.removed-weight)").length * 16;
+            numCat2Complete += $(".cat2.priority3.completed-weight:not(.removed-weight)").length * 8;
         
             let numCat3Complete = $(".cat3.priority0.completed-weight:not(.removed-weight)").length * 1;
             numCat3Complete += $(".cat3.priority1.completed-weight:not(.removed-weight)").length * 2;
             numCat3Complete += $(".cat3.priority2.completed-weight:not(.removed-weight)").length * 4;
-            numCat3Complete += $(".cat3.priority3.completed-weight:not(.removed-weight)").length * 16;
+            numCat3Complete += $(".cat3.priority3.completed-weight:not(.removed-weight)").length * 8;
         
             let totalWeight = numCat1 + numCat2 + numCat3 + numCat1Complete + numCat2Complete + numCat3Complete;
             if (totalWeight <= 0) {
@@ -128,12 +129,17 @@ export default class Stack extends Component{
             faceHeight = Math.max(minFaceSize, faceHeight);
             // console.log("faceHeight: " + faceHeight);
             $(":root").css('--faceHeightPercent', faceHeight);
+
+            let faceStretchingTasks = totalWeight - tasksAtMaxFaceSquish
+            faceStretchingTasks = Math.max(0, faceStretchingTasks); //keep faceStretchingTasks >= 0
+            faceStretchingTasks = 1 + (faceStretchingTasks*.002);
+            $(":root").css('--faceStretchPercent', faceStretchingTasks);
         };
         
         function removeLastWeightOfClass(targetParams) {
             // const targetParams = category+priority;
             const targetWeight = $(targetParams + ":not(.removed-weight)");
-            targetWeight[0].scrollIntoView({behavior: "smooth", block: "center", inline: "nearest"});
+            // targetWeight[0].scrollIntoView({behavior: "smooth", block: "center", inline: "nearest"});
             // targetWeight.last().removeClass("moved-weight");
             // targetWeight.last().removeClass("completed-weight");
             //end and print error if no matching weight is found
@@ -303,7 +309,7 @@ export default class Stack extends Component{
             sessionStorage.setItem("taskStackAlreadyAnimated", true);
             let delay = 0;
 
-            // animate = true;
+            animate = true;
 
             if(animate){
                 delay = 100;
@@ -358,7 +364,7 @@ export default class Stack extends Component{
             sessionStorage.setItem("taskStackAlreadyAnimated", true);
             let delay = 0;
 
-            // animate = true;
+            animate = true;
 
             if(animate){
                 delay = 100;
@@ -399,6 +405,7 @@ export default class Stack extends Component{
         // createWeightOfClass(".cat1", ".priority3", false);
         // alert(test);
 
+        $('#clearAllWeightsButton').on("click", function() {removeEveryWeight()});
         $('#addRandomWeightsButton').on("click", function() {DEBUGaddRandomWeights()});
         $('#clearCompletedTasksButton').on("click", function() {removeCompletedWeights()});
     };
@@ -414,11 +421,8 @@ export default class Stack extends Component{
                 <div id="flex_weights_container">
                     <div id="flex_weights_subcontainer">
                         {/* <!-- In reverse because flex:column-reverse! --> */}
-                        <div id="face">
-                            <div id="user_hat">
-                                
-                            </div>
-                        </div>
+                        <div id="weights"></div>
+
                         <div id="weight_tray">
                             
                             <div id="cat1BarComplete" class="completed-tray-section"></div>
@@ -430,10 +434,16 @@ export default class Stack extends Component{
                             <div id="cat3BarComplete" class="completed-tray-section"></div>
                             <div id="cat3Bar"></div>
                         </div>
-                        <div id="weights"></div>
+                        
+                        <div id="face">
+                            <div id="user_hat">
+                                
+                            </div>
+                        </div>
                         {/* <div id="weightCoinCounter">You have {localStorage.getItem('coins')} coins</div> */}
                     </div>
                 </div>
+                <button id='clearAllWeightsButton'>DEBUG clear all</button>
                 <button id='addRandomWeightsButton'>DEBUG add randoms</button>
                 <button id='clearCompletedTasksButton'>clear complete tasks</button>
             </div>

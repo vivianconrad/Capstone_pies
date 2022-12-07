@@ -1,7 +1,9 @@
 :root {
     --data_viz_width: min(68rem, 100vw);
     --faceHeightPercent: 1;
+    --faceStretchPercent: 1;
     --faceWidth: calc(var(--data_viz_width)*.75);
+    --squishTime: 500ms;
 }
 
 
@@ -21,10 +23,11 @@
     background: white;
     /* padding: 1rem 3rem; */
     overflow-y: auto;
-    overflow-x: visible;
+    overflow-x: hidden;
     display: flex;
     flex-direction: column-reverse;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+    position: relative;
 }
 
 #flex_weights_subcontainer * {
@@ -33,11 +36,11 @@
 
 #flex_weights_subcontainer {
     min-height: 100%;
-    display: inline-flex;
-    flex-direction: column-reverse;
+    /* display: inline-flex; */
+    /* flex-direction: column-reverse;
     justify-content: flex-start;
     align-content: center;
-    align-items: center;
+    align-items: center; */
     overflow-x: visible;
 }
 
@@ -52,6 +55,12 @@
     align-items: center;
     /* flex-basis: 1000rem; */
     flex-shrink: 1;
+    position: absolute;
+    bottom: 3rem;
+    width: var(--data_viz_width);
+    --distanceDown: calc(var(--faceWidth)*(var(--faceHeightPercent)*-1));
+    transform: translateY(calc(var(--distanceDown)));
+    transition: transform var(--squishTime);
 }
 
 
@@ -65,7 +74,6 @@
 } */
 
 .removed-weight,
-.removed-tray,
 .completed-weight.removed-weight {
     z-index: 1;
     animation: weight-remove 1s forwards ease-out;
@@ -80,18 +88,27 @@
     animation: weight-moved .2s forwards ease-in-out;
 }
 
+.completed-weight.moved-weight:not(.new-weight) {
+    animation: weight-moved .2s forwards ease-in-out, 3s ease-in-out infinite alternate breathingCompletedWeight;
+}
+
 .new-weight.moved-weight {
     /* newly added weights animate a bit slower on first move to add emphasis */
-    animation: weight-moved .3s forwards ease-out;
+    animation: weight-moved .2s forwards ease-out;
+}
+
+.completed-weight.new-weight.moved-weight {
+    /* newly added weights animate a bit slower on first move to add emphasis */
+    animation: weight-moved .2s forwards ease-out, 3s ease-in-out infinite alternate breathingCompletedWeight;
 }
 
 .completed-weight,
 .completed-tray-section {
     /* scale: 90%; */
-    filter: grayscale(70%);
-    opacity: 30%;
+    filter: grayscale(20%);
+    /* opacity: 30%; */
     /* animation: breathingCompletedWeight 1s timing-function delay iteration-count direction fill-mode; */
-    /* animation: 3s ease-in-out infinite alternate breathingCompletedWeight; */
+    animation: 3s ease-in-out infinite alternate breathingCompletedWeight;
 }
 
 @keyframes breathingCompletedWeight {
@@ -173,9 +190,10 @@
 }
 
 #flex_weights_subcontainer #weight_tray {
-    background-color: gray;
+    /* background-color: gray; */
     height: 1rem;
-    width: 90%;
+    /* width: 90%; */
+    width: calc(var(--data_viz_width)*.9);
     border-radius: 1rem 1rem 3rem 3rem;
     margin-block: .3rem;
     margin-top: .25rem;
@@ -189,6 +207,16 @@
     outline-offset: -.2rem;
     transition: height margin-top scale .5s;
     /* box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23); */
+    --distanceDown: calc(var(--faceWidth)*(var(--faceHeightPercent)*-1));
+    transform: translateY(var(--distanceDown));
+    transition: transform var(--squishTime);
+    position: absolute;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+    text-align: center;
+    bottom: 1rem;
 }
 
 #flex_weights_subcontainer #weight_tray * {
@@ -234,8 +262,9 @@
 
 #user_hat {
     /* display: none; */
-    min-height: 1rem;
-    height: calc(var(--data_viz_width)*.75*(var(--faceHeightPercent))*.5);
+    /* min-height: 1rem; */
+    /* height: calc(var(--data_viz_width)*.75*(var(--faceHeightPercent))*.5); */
+    height: calc(var(--data_viz_width)*.75*.5);
     width: calc(var(--data_viz_width)*.75);
     /* flex-basis: calc(var(--data_viz_width)*.75*(var(--faceHeightPercent)*var(--faceHeightPercent))*.5); */
     flex-grow: 0;
@@ -245,12 +274,18 @@
     background-position: center;
     background-repeat: no-repeat;
     position: relative;
-    bottom: calc(var(--data_viz_width)*.75*(var(--faceHeightPercent)*var(--faceHeightPercent))*.1);
+    /* bottom: calc(var(--data_viz_width)*.75*(var(--faceHeightPercent)*var(--faceHeightPercent))*.1); */
+    bottom: calc(var(--data_viz_width)*.75*.1);
     pointer-events: none;
-    transition: height 1500ms;
+    /* transition: transform 1500ms; */
 }
 
 #face {
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+    text-align: center;
     background-image: url("Rusch_Thomastmr80977-1[3431].jpg");
     background-size: 100% 100%;
     background-position: center;
@@ -258,11 +293,17 @@
     border-radius: 100%;
     outline: .3rem solid rgba(255, 255, 255, 0.75);
     outline-offset: -.3rem;
-    min-height: 5rem;
-    height: calc(var(--faceWidth)*var(--faceHeightPercent));
+    /* min-height: 5rem; */
+    /* height: calc(var(--faceWidth)*var(--faceHeightPercent)); */
+    height: var(--faceWidth);
     width: var(--faceWidth);
-    will-change: height;
-    transition: height 1500ms;
+    flex-shrink: 0;
+    transform: scaleY(var(--faceHeightPercent)) scaleX(var(--faceStretchPercent));
+    transform-origin: bottom;
+    will-change: transform;
+    transition: transform var(--squishTime);
+    position: absolute;
+    bottom: 0;
 }
 
 @keyframes weight-remove {
@@ -278,10 +319,10 @@
         scale: 1 1;
     }
     40% {
-        scale: 1 0;
+        scale: 0 1;
     }
     50% {
-        scale: 1 0;
+        scale: 0 1;
     }
     to {
         scale: 1 1;
@@ -308,11 +349,24 @@
     position: absolute;
     bottom: 6rem;
     right: 1rem;
-    opacity: 70%;
+    opacity: 20%;
+    transition: opacity 100ms;
+}
+
+#clearAllWeightsButton {
+    padding: 1rem;
+    border-radius: 2rem;
+    color: white;
+    background-color: orange;
+    position: absolute;
+    bottom: 11rem;
+    right: 1rem;
+    opacity: 20%;
     transition: opacity 100ms;
 }
 
 #clearCompletedTasksButton:hover,
-#addRandomWeightsButton:hover {
+#addRandomWeightsButton:hover,
+#clearAllWeightsButton:hover {
     opacity: 100%;
 }
