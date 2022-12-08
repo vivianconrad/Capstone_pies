@@ -1,5 +1,13 @@
 # Stuff to know
 
+To run it on your localhost, you may need to run these NPM commands:
+npm install jquery --save
+npm install react-scripts --save
+
+## Background 
+
+We developed an app called TaskPies to manage tasks for neurodivergent individuals. Our title and app name are derived from a task prioritization strategy that is highly recommended by psychologists called the bucket system. A bucket system benefits neurodivergent individuals since it allows them to break down large, daunting tasks into smaller, manageable tasks in categorized to-do lists. It can be challenging for neurodivergent individuals to regulate their energy and delegate tasks accordingly. The bucket system encourages them to organize tasks according to their high, medium, and low energy levels. As part of our app, we have implemented a prioritization system that uses the symbol “!” to indicate the priority level of a task and, therefore, the amount of energy needed to accomplish it. So the smaller lists or buckets allow users to manage tasks based on energy level, which “cuts down the possibility that you’ll wile your prime energy time away” on small tasks (Caldwell and ADDept.org). We used a pie chart to visualize task completion, hence Task Pies.
+
 ## Progress Bar
 
 recharts
