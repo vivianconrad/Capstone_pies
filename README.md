@@ -1,7 +1,9 @@
 # Stuff to know
 
 To run it on your localhost, you may need to run these NPM commands:
+
 npm install jquery --save
+
 npm install react-scripts --save
 
 ## Background 
