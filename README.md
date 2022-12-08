@@ -1,3 +1,13 @@
+# HOW TO RUN
+To run this project on your own LocalHost, you may need to install these NPM packages first:
+````
+npm install jquery --save
+````
+````
+npm install react-scripts --save
+````
+
+
 # Stuff to know
 
 ## React Template
