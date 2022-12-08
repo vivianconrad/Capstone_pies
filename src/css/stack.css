@@ -87,7 +87,7 @@
 
 .completed-weight.moved-weight:not(.new-weight) {
 	animation: weight-moved 0.2s forwards ease-in-out,
-		3s ease-in-out infinite alternate breathingCompletedWeight;
+		2s ease-in-out infinite alternate breathingCompletedWeight;
 }
 
 .new-weight.moved-weight {
@@ -98,7 +98,7 @@
 .completed-weight.new-weight.moved-weight {
 	/* newly added weights animate a bit slower on first move to add emphasis */
 	animation: weight-moved 0.2s forwards ease-out,
-		3s ease-in-out infinite alternate breathingCompletedWeight;
+		2s ease-in-out infinite alternate breathingCompletedWeight;
 }
 
 .completed-weight,
@@ -107,18 +107,18 @@
 	filter: grayscale(20%);
 	/* opacity: 30%; */
 	/* animation: breathingCompletedWeight 1s timing-function delay iteration-count direction fill-mode; */
-	animation: 3s ease-in-out infinite alternate breathingCompletedWeight;
+	animation: 2s ease-in-out infinite alternate breathingCompletedWeight;
 }
 
 .completed-weight.new-weight {
 	filter: grayscale(20%);
 	animation: weight-remove 0.2s forwards ease-in reverse,
-		3s ease-in-out infinite alternate breathingCompletedWeight;
+		2s ease-in-out infinite alternate breathingCompletedWeight;
 }
 
 @keyframes breathingCompletedWeight {
 	from {
-		opacity: 40%;
+		opacity: 70%;
 	}
 	to {
 		opacity: 20%;
