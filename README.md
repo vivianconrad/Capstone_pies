@@ -1,4 +1,11 @@
-# Name: Task Pies
+
+# TaskPies - Computer Science Capstone Project
+
+As part of a 4-student team, I contributed to the development of TaskPies, a task management application designed specifically for neurodivergent individuals. Our team was inspired by the bucket system, a task prioritization strategy recommended by psychologists, and we incorporated it into the app's design.
+
+Neurodivergent individuals often struggle with energy regulation and task delegation, so the bucket system's ability to break down large tasks into smaller, more manageable ones within categorized to-do lists is especially beneficial. To further aid this, we incorporated a prioritization system using the symbol "!" to indicate the task's priority level and the amount of energy required to complete it.
+
+We worked on this project for a semester and it was a fantastic opportunity to create something that can make a real difference in people's lives.
 
 We developed an app called TaskPies to manage tasks for neurodivergent individuals. Our title and app name are derived from a task prioritization strategy that is highly recommended by psychologists called the bucket system. A bucket system benefits neurodivergent individuals since it allows them to break down large, daunting tasks into smaller, manageable tasks in categorized to-do lists. It can be challenging for neurodivergent individuals to regulate their energy and delegate tasks accordingly. The bucket system encourages them to organize tasks according to their high, medium, and low energy levels. As part of our app, we have implemented a prioritization system that uses the symbol “!” to indicate the priority level of a task and, therefore, the amount of energy needed to accomplish it. 
 
